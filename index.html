@@ -8,10 +8,16 @@
   <title>Freaking Math Clone</title>
 </head>
 <body>
-
-
-  
-  
+    <form name="myForm" id="myForm" action="#">
+      <label>What is:</label>
+      <input id="question" name="question" type="text" /><br>
+      <label>The answer is:</label>
+      <input id="answer" name="answer" type="text" /><br>
+      <label>Correct answer:</label>
+      <input id="total" name="total" type="text" /><br>
+      <button class="button" name="button" type="button" onclick="genQuestion()" >Generate new Question</button>
+      <button class="button" name="button" type="button" onclick="checkAnswer()" >Check answer</button>
+    </form>
   <script src="script.js"></script>
 </body>
 </html>
