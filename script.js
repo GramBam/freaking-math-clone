@@ -1,18 +1,25 @@
 let x, y;
+let answer = false;
+const correctBtn = document.getElementById('correct');
+const incorrectBtn = document.getElementById('incorrect');
 
-function generateNumbers() {
-  function getRandom12() {
-    return Math.floor((Math.random() * 12) + 1);
+function startGame() {
+  
+}
+
+function genNumbers() {
+  function getRandomNum() {
+    return Math.floor((Math.random() * 10) + 1);
   }
-  x = getRandom12();
-  y = getRandom12();
+  x = getRandomNum();
+  y = getRandomNum();
+  answer = getRandomNum();
 }
 
 function genQuestion() {
-  generateNumbers();
-  document.getElementById('question').value = x + " + " + y;
-  document.getElementById('answer').value = '';
-  document.getElementById('total').value = ''
+  genNumbers();
+  document.getElementById('question').innerHTML = x + " + " + y;
+  document.getElementById('answer').innerHTML = Math.floor(Math.random() * 20) + 1
 }
 
 function checkAnswer() {
@@ -20,4 +27,6 @@ function checkAnswer() {
   document.getElementById('total').value = x + y;
 }
 
-genQuestion();
+function gameOver() {
+  alert('game over!')
+}
