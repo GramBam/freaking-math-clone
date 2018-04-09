@@ -25,7 +25,7 @@ function genNumbers() {
   }
   x = getRandomNum();
   y = getRandomNum();
-  answer = Math.floor(Math.random() * (x + y - + 2)) + (x + y - 2);
+  answer = genAnswerNum(((x+y) - 2),((x+y) + 2));
 }
 
 function genQuestion() {
@@ -33,6 +33,10 @@ function genQuestion() {
   genNumbers();
   document.getElementById('question').innerHTML = x + " + " + y;
   document.getElementById('answer').innerHTML = answer;
+}
+
+function genAnswerNum(min, max) {
+  return Math.floor(Math.random()*(max-min+1)+min);
 }
 
 function checkIfCorrect() {
