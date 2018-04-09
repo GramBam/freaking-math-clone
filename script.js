@@ -1,5 +1,6 @@
 let x, y, answer;
 let result = false;
+const canvas = document.getElementById('canvas');
 const correctBtn = document.getElementById('correct');
 const incorrectBtn = document.getElementById('incorrect');
 
@@ -21,6 +22,7 @@ function genNumbers() {
 }
 
 function genQuestion() {
+  randomColour();
   genNumbers();
   document.getElementById('question').innerHTML = x + " + " + y;
   document.getElementById('answer').innerHTML = answer;
@@ -42,6 +44,10 @@ function checkIfIncorrect() {
   }
 }
 
+function randomColour() {
+  const colour = '#' + Math.floor(Math.random() * 16777215).toString(16);
+  canvas.style.backgroundColor = colour;
+}
 
 function gameOver() {
   alert('game over!')

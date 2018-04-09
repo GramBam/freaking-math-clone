@@ -1,13 +1,36 @@
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+  color: #ecf0f1;
 }
 body {
   background: #000;
 }
 
-#c2canvasdiv {
+#canvas {
   background-color: rgb(255, 0, 136);
   color: white;
   font-size: 42px;
+  position: relative;
+  padding-top: 60px;
+}
+
+.button {
+    width: 136px;
+    height: 136px;
+    padding: 0;
+    margin-top: 70px;
+    background-size: cover;
+    border: none;
+    background-color: transparent;
+}
+
+#correct {
+  background-image: url('http://www.hoodamath.com/mobile/games/freaking-math/images/rightbutton-sheet0.png');
+}
+
+#incorrect {
+  background-image: url('http://www.hoodamath.com/mobile/games/freaking-math/images/wrongbutton-sheet0.png');
 }
