@@ -1,12 +1,19 @@
 let x, y, answer;
-let result = false;
+let score = 0;
+let gameEnded = false;
+let timeOut = undefined;
+const timeLimit = 3000;
 const canvas = document.getElementById('canvas');
 const correctBtn = document.getElementById('correct');
 const incorrectBtn = document.getElementById('incorrect');
+const scoreDisplay = document.getElementById('score');
+const timer = document.getElementById('timer');
+const gameOverSound = new Audio('gameOver.mp3');
 
 document.addEventListener('DOMContentLoaded', startGame());
 
 function startGame() {
+  updateScore();
   genQuestion();
   correctBtn.addEventListener('click', checkIfCorrect);
   incorrectBtn.addEventListener('click', checkIfIncorrect);
@@ -18,7 +25,7 @@ function genNumbers() {
   }
   x = getRandomNum();
   y = getRandomNum();
-  answer = Math.floor(Math.random() * 20) + 1;
+  answer = Math.floor(Math.random() * (x + y - + 2)) + (x + y - 2);
 }
 
 function genQuestion() {
@@ -30,7 +37,10 @@ function genQuestion() {
 
 function checkIfCorrect() {
   if(x + y === answer) {
+    score++;
+    updateScore();
     genQuestion();
+    restartTimer();
   } else {
     gameOver();
   }
@@ -40,8 +50,34 @@ function checkIfIncorrect() {
   if(x + y === answer) {
     gameOver();
   } else {
+    score++
+    updateScore();
     genQuestion();
+    restartTimer();
   }
+}
+
+function restartTimer() {
+  if (timeOut) { 
+    timer.className = ''
+    window.clearTimeout(timeOut)
+  }
+  startTimer()
+}
+
+function startTimer () {
+  window.setTimeout(function () {
+    timer.className = 'active'
+  }, 100)
+    timeOut = window.setTimeout(function() {
+    if (!gameEnded) {
+      gameOver();
+    }
+  }, timeLimit)
+}
+
+function updateScore() {
+  scoreDisplay.innerHTML = "Score: " + score;
 }
 
 function randomColour() {
@@ -50,5 +86,8 @@ function randomColour() {
 }
 
 function gameOver() {
-  alert('game over!')
+  gameOverSound.play();
+  gameEnded = true;
+  score = 0;
+  updateScore();
 }
