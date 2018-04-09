@@ -1,10 +1,14 @@
-let x, y;
-let answer = false;
+let x, y, answer;
+let result = false;
 const correctBtn = document.getElementById('correct');
 const incorrectBtn = document.getElementById('incorrect');
 
+document.addEventListener('DOMContentLoaded', startGame());
+
 function startGame() {
-  
+  genQuestion();
+  correctBtn.addEventListener('click', checkIfCorrect);
+  incorrectBtn.addEventListener('click', checkIfIncorrect);
 }
 
 function genNumbers() {
@@ -13,19 +17,31 @@ function genNumbers() {
   }
   x = getRandomNum();
   y = getRandomNum();
-  answer = getRandomNum();
+  answer = Math.floor(Math.random() * 20) + 1;
 }
 
 function genQuestion() {
   genNumbers();
   document.getElementById('question').innerHTML = x + " + " + y;
-  document.getElementById('answer').innerHTML = Math.floor(Math.random() * 20) + 1
+  document.getElementById('answer').innerHTML = answer;
 }
 
-function checkAnswer() {
-  alert(x + y === +document.getElementById('answer').value ? 'Great' : 'Not Yet');
-  document.getElementById('total').value = x + y;
+function checkIfCorrect() {
+  if(x + y === answer) {
+    genQuestion();
+  } else {
+    gameOver();
+  }
 }
+
+function checkIfIncorrect() {
+  if(x + y === answer) {
+    gameOver();
+  } else {
+    genQuestion();
+  }
+}
+
 
 function gameOver() {
   alert('game over!')
