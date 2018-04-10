@@ -8,15 +8,20 @@ const correctBtn = document.getElementById('correct');
 const incorrectBtn = document.getElementById('incorrect');
 const scoreDisplay = document.getElementById('score');
 const timer = document.getElementById('timer');
+const gameOverScreen = document.getElementById('game-over');
+const finalScore = document.getElementById('final-score');
+const playAgain = document.getElementById('play-again');
 const gameOverSound = new Audio('gameOver.mp3');
 
 document.addEventListener('DOMContentLoaded', startGame());
 
 function startGame() {
+  gameOverScreen.className = 'hidden';
   updateScore();
   genQuestion();
   correctBtn.addEventListener('click', checkIfCorrect);
   incorrectBtn.addEventListener('click', checkIfIncorrect);
+  playAgain.addEventListener('click', startGame);
 }
 
 function genNumbers() {
@@ -25,7 +30,7 @@ function genNumbers() {
   }
   x = getRandomNum();
   y = getRandomNum();
-  answer = genAnswerNum(((x+y) - 2),((x+y) + 2));
+  answer = genAnswerNum(((x+y) - 1),((x+y) + 1));
 }
 
 function genQuestion() {
@@ -92,6 +97,9 @@ function randomColour() {
 function gameOver() {
   gameOverSound.play();
   gameEnded = true;
+  gameOverScreen.className = 'displayed';
+  gameOverScreen
+  finalScore.innerHTML = 'Score: ' + score;
   score = 0;
   updateScore();
 }
