@@ -10,11 +10,13 @@ body {
 }
 
 #canvas {
-  background-color: rgb(255, 0, 136);
   color: white;
-  font-size: 62px;
+  font-size: 82px;
   position: relative;
   padding-top: 60px;
+  width: 40%;
+  height: 965px;
+  left: 30%;
 }
 
 .content {
@@ -38,7 +40,7 @@ body {
 }
 
 #timer.active {
-  animation: tmr 3s forwards;
+  animation: tmr 2s forwards;
 }
 
 @keyframes tmr {

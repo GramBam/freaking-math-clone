@@ -2,7 +2,7 @@ let x, y, answer;
 let score = 0;
 let gameEnded = false;
 let timeOut = undefined;
-const timeLimit = 3000;
+const timeLimit = 2000;
 const canvas = document.getElementById('canvas');
 const correctBtn = document.getElementById('correct');
 const incorrectBtn = document.getElementById('incorrect');
@@ -10,6 +10,7 @@ const scoreDisplay = document.getElementById('score');
 const timer = document.getElementById('timer');
 const gameOverScreen = document.getElementById('game-over');
 const finalScore = document.getElementById('final-score');
+const highScore = document.getElementById('high-score');
 const playAgain = document.getElementById('play-again');
 const gameOverSound = new Audio('gameOver.mp3');
 
@@ -89,6 +90,21 @@ function updateScore() {
   scoreDisplay.innerHTML = "Score: " + score;
 }
 
+function getHighScore() {
+  let highScore = window.localStorage.getItem('highscore')
+  if (highScore) {
+    if (highScore < score) {
+      window.localStorage.setItem('highscore', score)
+      return score
+    } else {
+      return highScore
+    }
+  } else {
+    window.localStorage.setItem('highscore', score)
+    return score
+  }
+}
+
 function randomColour() {
   const colour = '#' + Math.floor(Math.random() * 16777215).toString(16);
   canvas.style.backgroundColor = colour;
@@ -100,6 +116,7 @@ function gameOver() {
   gameOverScreen.className = 'displayed';
   gameOverScreen
   finalScore.innerHTML = 'Score: ' + score;
+  highScore.innerHTML = 'Highscore: ' + getHighScore();
   score = 0;
   updateScore();
 }
